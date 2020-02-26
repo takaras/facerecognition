@@ -1,12 +1,32 @@
 import React from 'react';
 import './App.css';
+import Navigation from './components/Navigation/Navigation';
+import Logo from './components/Logo/Logo';
+import ImageLinkForm from './components/ImageLinkForm/ImageLinkForm';
+import Rank from './components/Rank/Rank';
+import Particles from 'react-particles-js';
+
+const particlesOptions = {
+  particles: {
+    number: {
+      value: 150,
+      density: {
+        enable: true,
+        value_area: 800,
+      },
+    },
+  },
+};
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <h1>Face recognition app</h1>
-      </header>
+      <Particles className="particles" params={particlesOptions} />
+      <Navigation />
+      <Logo />
+      <Rank />
+      <ImageLinkForm />
+      {/* { <FaceRecognition />} */}
     </div>
   );
 }
