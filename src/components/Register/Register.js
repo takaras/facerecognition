@@ -10,15 +10,15 @@ class Register extends React.Component {
       registerError: '',
     };
   }
-  onEmailChange = event => {
+  onEmailChange = (event) => {
     this.setState({ registerEmail: event.target.value });
   };
 
-  onPasswordChange = event => {
+  onPasswordChange = (event) => {
     this.setState({ registerPassword: event.target.value });
   };
 
-  onNameChange = event => {
+  onNameChange = (event) => {
     this.setState({ registerName: event.target.value });
   };
 
@@ -32,8 +32,8 @@ class Register extends React.Component {
         password: this.state.registerPassword,
       }),
     })
-      .then(response => response.json())
-      .then(user => {
+      .then((response) => response.json())
+      .then((user) => {
         if (typeof user.id == 'undefined') {
           this.setState({ registerError: 'Could not register' });
           this.refs.email.value = '';

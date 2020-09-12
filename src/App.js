@@ -41,7 +41,7 @@ class App extends Component {
     this.state = initialState;
   }
 
-  loadUser = data => {
+  loadUser = (data) => {
     this.setState({
       user: {
         id: data.id,
@@ -53,7 +53,7 @@ class App extends Component {
     });
   };
 
-  calculateFaceLocation = data => {
+  calculateFaceLocation = (data) => {
     const clarifaiFace =
       data.outputs[0].data.regions[0].region_info.bounding_box;
     const image = document.getElementById('inputImage');
@@ -67,11 +67,11 @@ class App extends Component {
     };
   };
 
-  displayFaceBox = box => {
+  displayFaceBox = (box) => {
     this.setState({ box });
   };
 
-  onInputChange = event => {
+  onInputChange = (event) => {
     this.setState({ input: event.target.value });
   };
 
@@ -86,10 +86,11 @@ class App extends Component {
         input: this.state.input,
       }),
     })
-      .then(response => response.json())
-      .then(response => {
+      .then((response) => response.json())
+      .then((response) => {
         if (response) {
-          fetch('http://localhost:3000/image', {
+          fetch('https://calm-shelf-01455.herokuapp.com/image', {
+            // fetch('http://localhost:3000/image', {
             method: 'put',
             headers: {
               'Content-Type': 'application/json',
@@ -98,18 +99,18 @@ class App extends Component {
               id: this.state.user.id,
             }),
           })
-            .then(response => response.json())
-            .then(count => {
+            .then((response) => response.json())
+            .then((count) => {
               this.setState(Object.assign(this.state.user, { entries: count }));
             })
             .catch(console.log);
           this.displayFaceBox(this.calculateFaceLocation(response));
         }
       })
-      .catch(err => console.log(err));
+      .catch((err) => console.log(err));
   };
 
-  onRouteChange = route => {
+  onRouteChange = (route) => {
     if (route === 'signin') {
       this.setState(initialState);
     } else if (route === 'home') {

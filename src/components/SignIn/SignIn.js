@@ -7,12 +7,15 @@ class SignIn extends React.Component {
       signInEmail: '',
       signInPassword: '',
     };
+    this.email = React.createRef();
+    this.pass = React.createRef();
   }
-  onEmailChange = event => {
+
+  onEmailChange = (event) => {
     this.setState({ signInEmail: event.target.value });
   };
 
-  onPasswordChange = event => {
+  onPasswordChange = (event) => {
     this.setState({ signInPassword: event.target.value });
   };
 
@@ -27,15 +30,15 @@ class SignIn extends React.Component {
         password: this.state.signInPassword,
       }),
     })
-      .then(response => response.json())
-      .then(user => {
+      .then((response) => response.json())
+      .then((user) => {
         if (user.id) {
           this.props.loadUser(user);
           this.props.onRouteChange('home');
           return;
         }
-        this.refs.email.value = '';
-        this.refs.pass.value = '';
+        this.email.current.value = '';
+        this.pass.current.value = '';
         this.setState({ signInEmail: '', signInPassword: '' });
       });
   };
@@ -58,7 +61,7 @@ class SignIn extends React.Component {
                   type="email"
                   name="email-address"
                   id="email-address"
-                  ref="email"
+                  ref={this.email}
                 />
               </div>
               <div className="mv3">
@@ -71,7 +74,7 @@ class SignIn extends React.Component {
                   type="password"
                   name="password"
                   id="password"
-                  ref="pass"
+                  ref={this.pass}
                 />
               </div>
             </fieldset>
